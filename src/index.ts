@@ -8,18 +8,13 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
 (async () => {
     try {
-        const client: Client = connect('mqtt://192.168.31.125:1883', {
+        const client: Client = connect('mqtt://mqtt-broker.smarthome.lan:1883', {
             protocol: 'mqtt',
         });
 
         client.on('connect', () => {
-            client.subscribe('configuration', function (error: Error) {
-                if (!error) {
-                    console.error(error);
-                }
-            });
-            client.subscribe('5ledstrip/config', function (error: Error) {
-                if (!error) {
+            client.subscribe('#', function (error: Error) {
+                if (error) {
                     console.error(error);
                 }
             });
@@ -27,11 +22,15 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
         });
 
         client.on('message', (topic, message) => {
+            console.log('message');
+            console.log('TOPIC', topic);
+            console.log('MESSAGE', message.toString());
             if (topic === "configuration") {
+                console.log(topic);
                 const jsonPayload = JSON.parse(message.toString());
                 console.log(jsonPayload);
                 axios.post(
-                    'http://192.168.31.248:8000/api/mqtt/configuration',
+                    'http://backend.smarthome.lan:8000/api/mqtt/configuration',
                     querystring.stringify({
                         deviceId: jsonPayload.deviceId,
                         configuration: jsonPayload.configs,
@@ -71,7 +70,7 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
     //         {r: 255, g: 255, b: 255, type: 'color'}],
     // };
     // axios.post(
-    //     'http://192.168.31.248:8000/api/mqtt/configuration',
+    //     'http://backend.smarthome.lan:8000/api/mqtt/configuration',
     //     querystring.stringify({
     //         deviceId: jsonPayload.deviceId,
     //         configuration: JSON.stringify(jsonPayload.configs),

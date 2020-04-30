@@ -6,7 +6,9 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/Index.js",
-    "simulate": "npm run build && npm run start"
+    "simulate": "npm run build && npm run start",
+    "deploy setup": "pm2 deploy production setup",
+    "deploy": "pm2 deploy production update"
   },
   "repository": {
     "type": "git",

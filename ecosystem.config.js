@@ -22,7 +22,7 @@ module.exports = {
             repo: 'git@github.com:ilesar/smart-home-mqtt-pipe.git',
             path: '/home/pi/Servers/smart-home/mqtt-pipe',
             'pre-deploy-local': '',
-            'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env production',
+            'post-deploy': 'npm install && npm run build && pm2 reload ecosystem.config.js --env production',
             'pre-setup': '',
             env: {
                 "NODE_ENV": "production"

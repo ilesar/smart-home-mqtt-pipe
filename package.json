@@ -22,12 +22,12 @@
   "homepage": "https://github.com/ilesar/smart-home-mqtt-pipe#readme",
   "dependencies": {
     "@types/axios": "^0.14.0",
+    "@types/node": "^13.13.0",
     "axios": "^0.19.2",
     "mqtt": "^3.0.0",
     "typescript": "^3.8.3"
   },
   "devDependencies": {
-    "@types/node": "^13.13.0",
     "@types/dotenv": "^8.2.0",
     "dotenv": "^8.2.0",
     "pm2": "^4.3.0"

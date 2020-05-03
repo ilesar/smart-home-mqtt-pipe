@@ -16,11 +16,11 @@ module.exports = {
     deploy: {
         production: {
             ssh_options: 'StrictHostKeyChecking=no',
-            user: 'pi',
-            host: ['192.168.31.125'],
+            user: 'ivan',
+            host: ['192.168.31.200'],
             ref: 'origin/master',
             repo: 'git@github.com:ilesar/smart-home-mqtt-pipe.git',
-            path: '/home/pi/Servers/smart-home/mqtt-pipe',
+            path: '/home/ivan/Servers/smart-home/mqtt-pipe',
             'pre-deploy-local': '',
             'post-deploy': 'npm install && npm run build && pm2 reload ecosystem.config.js --env production',
             'pre-setup': '',

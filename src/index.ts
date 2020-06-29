@@ -2,13 +2,20 @@ import {Client, connect} from 'mqtt';
 import * as https from 'https';
 import axios, {AxiosResponse} from 'axios';
 
+require('dotenv').config();
+
 const querystring = require('querystring');
 
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
+const brokerHost = process.env.BROKER_HOST ?? 'core.smarthome.lan';
+const brokerPort = process.env.BROKER_HOST ?? '1883';
+const backendHost = process.env.BACKEND_HOST ?? 'core.smarthome.lan';
+const backendPort = process.env.BACKEND_HOST ?? '8002';
+
 (async () => {
     try {
-        const client: Client = connect('mqtt://mqtt-broker.smarthome.lan:1883', {
+        const client: Client = connect(`mqtt://${brokerHost}:${brokerPort}`, {
             protocol: 'mqtt',
         });
 
@@ -30,7 +37,7 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
                 const jsonPayload = JSON.parse(message.toString());
                 console.log(jsonPayload);
                 axios.post(
-                    'http://backend.smarthome.lan:8000/api/mqtt/configuration',
+                    `http://${backendHost}:${backendPort}/api/mqtt/configuration`,
                     querystring.stringify({
                         deviceId: jsonPayload.deviceId,
                         configuration: jsonPayload.configs,

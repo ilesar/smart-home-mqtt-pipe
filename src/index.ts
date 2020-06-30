@@ -9,9 +9,10 @@ const querystring = require('querystring');
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
 const brokerHost = process.env.BROKER_HOST ?? 'core.smarthome.lan';
-const brokerPort = process.env.BROKER_HOST ?? '1883';
+const brokerPort = process.env.BROKER_PORT ?? '1883';
+
 const backendHost = process.env.BACKEND_HOST ?? 'core.smarthome.lan';
-const backendPort = process.env.BACKEND_HOST ?? '8002';
+const backendPort = process.env.BACKEND_PORT ?? '8002';
 
 (async () => {
     try {

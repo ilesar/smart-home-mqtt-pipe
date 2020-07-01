@@ -12,7 +12,7 @@ const brokerHost = process.env.BROKER_HOST ?? 'core.smarthome.lan';
 const brokerPort = process.env.BROKER_PORT ?? '1883';
 
 const backendHost = process.env.BACKEND_HOST ?? 'core.smarthome.lan';
-const backendPort = process.env.BACKEND_PORT ?? '8002';
+const backendPort = process.env.BACKEND_PORT ?? '8001';
 
 (async () => {
     try {
